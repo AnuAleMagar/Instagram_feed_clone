@@ -1,0 +1,25 @@
+{
+  "name": "instagram-feed-backend",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Backend for Instagram-style feed with fan-out architecture",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@stargate-oss/stargate-grpc-node-client": "^0.2.3",
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "kafkajs": "^2.2.4",
+    "kafkajs-snappy": "^1.1.0",
+    "pg": "^8.16.3",
+    "pg-hstore": "^2.3.4",
+    "redis": "^5.10.0",
+    "sequelize": "^6.37.7"
+  }
+}
