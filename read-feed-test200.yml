@@ -1,0 +1,37 @@
+config:
+  target: "http://localhost:3000"
+  phases:
+    - duration: 60
+      arrivalRate: 200
+
+scenarios:
+  - name: "Get Feed - First Page"
+    weight: 80
+    flow:
+      - get:
+          url: "/api/posts/feed/{{ $randomNumber(1, 50) }}"
+          qs:
+            limit: 20
+      - think: 2 # Wait 2 seconds (simulating user reading)
+
+  - name: "Get Feed - Second Page"
+    weight: 15
+    flow:
+      - get:
+          url: "/api/posts/feed/{{ $randomNumber(1, 50) }}"
+          qs:
+            limit: 20
+      - think: 2
+      - get:
+          url: "/api/posts/feed/{{ $randomNumber(1, 50) }}"
+          qs:
+            limit: 20
+            cursor: "{{ $processEnvironment.lastCursor }}" # Would need to extract from previous response
+
+  - name: "Get Feed - Large Batch"
+    weight: 5
+    flow:
+      - get:
+          url: "/api/posts/feed/{{ $randomNumber(1, 50) }}"
+          qs:
+            limit: 100

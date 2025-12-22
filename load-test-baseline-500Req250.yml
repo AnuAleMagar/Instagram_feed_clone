@@ -1,0 +1,15 @@
+config:
+  target: "http://localhost:3000"
+  phases:
+    - duration: 60
+      arrivalRate: 250 # Run the scenario only once
+
+scenarios:
+  - name: "Create Post - User with 500 Followers"
+    flow:
+      - post:
+          url: "/api/posts"
+          json:
+            user_id: 2 # user2 is celebrity with 500 followers
+            caption: "Load Test for 500 requests- {{ $randomString() }}"
+            image_url: "https://example.com/image-{{ $randomNumber(1, 1000) }}.jpg"
